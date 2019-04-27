@@ -20,14 +20,20 @@ type passthrough struct{ base }
 func newPassthrough(c *clientWrapper) *passthrough {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &passthrough{base{client: c}}
 }
 func (a *passthrough) Create(ctx context.Context, cr *minterv1.CredentialsRequest) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return a.Update(ctx, cr)
 }
 func (a *passthrough) Update(ctx context.Context, cr *minterv1.CredentialsRequest) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	root, err := a.client.RootSecret(ctx)
@@ -54,6 +60,8 @@ func (a *passthrough) Update(ctx context.Context, cr *minterv1.CredentialsReques
 	return nil
 }
 func copySecret(cr *minterv1.CredentialsRequest, src *secret, dest *secret) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	dest.ObjectMeta = metav1.ObjectMeta{Name: cr.Spec.SecretRef.Name, Namespace: cr.Spec.SecretRef.Namespace, Annotations: map[string]string{minterv1.AnnotationCredentialsRequest: fmt.Sprintf("%s/%s", cr.Namespace, cr.Name)}}

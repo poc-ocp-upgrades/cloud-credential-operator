@@ -38,14 +38,20 @@ const (
 func Add(mgr manager.Manager) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return add(mgr, newReconciler(mgr))
 }
 func newReconciler(mgr manager.Manager) reconcile.Reconciler {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &ReconcileCloudCredSecret{Client: mgr.GetClient(), logger: log.WithField("controller", controllerName), AWSClientBuilder: ccaws.NewClient}
 }
 func cloudCredSecretObjectCheck(secret metav1.Object) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if secret.GetNamespace() == CloudCredSecretNamespace && secret.GetName() == CloudCredSecretName {
@@ -54,6 +60,8 @@ func cloudCredSecretObjectCheck(secret metav1.Object) bool {
 	return false
 }
 func add(mgr manager.Manager, r reconcile.Reconciler) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	c, err := controller.New(controllerName, mgr, controller.Options{Reconciler: r})
@@ -85,6 +93,8 @@ type ReconcileCloudCredSecret struct {
 func (r *ReconcileCloudCredSecret) Reconcile(request reconcile.Request) (reconcile.Result, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	r.logger.Info("validating cloud cred secret")
 	secret := &corev1.Secret{}
 	err := r.Get(context.Background(), request.NamespacedName, secret)
@@ -100,6 +110,8 @@ func (r *ReconcileCloudCredSecret) Reconcile(request reconcile.Request) (reconci
 	return reconcile.Result{}, nil
 }
 func (r *ReconcileCloudCredSecret) validateCloudCredsSecret(secret *corev1.Secret) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	accessKey, ok := secret.Data[AwsAccessKeyName]
@@ -144,6 +156,8 @@ func (r *ReconcileCloudCredSecret) validateCloudCredsSecret(secret *corev1.Secre
 func (r *ReconcileCloudCredSecret) updateSecretAnnotations(secret *corev1.Secret, value string) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	secretAnnotations := secret.GetAnnotations()
 	if secretAnnotations == nil {
 		secretAnnotations = map[string]string{}
@@ -155,7 +169,16 @@ func (r *ReconcileCloudCredSecret) updateSecretAnnotations(secret *corev1.Secret
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

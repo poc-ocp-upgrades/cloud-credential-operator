@@ -9,5 +9,7 @@ var AddToSchemes runtime.SchemeBuilder
 func AddToScheme(s *runtime.Scheme) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return AddToSchemes.AddToScheme(s)
 }

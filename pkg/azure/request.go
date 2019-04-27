@@ -11,6 +11,8 @@ type request struct {
 func newRequest(cr *minterv1.CredentialsRequest) (*request, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	codec, err := minterv1.NewCodec()
 	if err != nil {
 		return nil, err

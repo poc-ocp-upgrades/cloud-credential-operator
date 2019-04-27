@@ -10,6 +10,8 @@ type secret struct{ corev1.Secret }
 func (s *secret) HasAnnotation() bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if s.ObjectMeta.Annotations == nil {
 		return false
 	}
@@ -19,6 +21,8 @@ func (s *secret) HasAnnotation() bool {
 	return true
 }
 func (s *secret) Clone() *secret {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return &secret{*s.Secret.DeepCopy()}

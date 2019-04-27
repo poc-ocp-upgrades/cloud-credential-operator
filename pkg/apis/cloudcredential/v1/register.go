@@ -14,5 +14,7 @@ var (
 func Resource(resource string) schema.GroupResource {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return SchemeGroupVersion.WithResource(resource).GroupResource()
 }

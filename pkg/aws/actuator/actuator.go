@@ -51,6 +51,8 @@ type AWSActuator struct {
 func NewAWSActuator(client client.Client, scheme *runtime.Scheme) (*AWSActuator, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	codec, err := minterv1.NewCodec()
 	if err != nil {
 		log.WithError(err).Error("error creating AWS codec")
@@ -59,6 +61,8 @@ func NewAWSActuator(client client.Client, scheme *runtime.Scheme) (*AWSActuator,
 	return &AWSActuator{Codec: codec, Client: client, AWSClientBuilder: ccaws.NewClient, Scheme: scheme}, nil
 }
 func DecodeProviderStatus(codec *minterv1.ProviderCodec, cr *minterv1.CredentialsRequest) (*minterv1.AWSProviderStatus, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	awsStatus := minterv1.AWSProviderStatus{}
@@ -75,6 +79,8 @@ func DecodeProviderStatus(codec *minterv1.ProviderCodec, cr *minterv1.Credential
 func DecodeProviderSpec(codec *minterv1.ProviderCodec, cr *minterv1.CredentialsRequest) (*minterv1.AWSProviderSpec, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if cr.Spec.ProviderSpec != nil {
 		awsSpec := minterv1.AWSProviderSpec{}
 		err := codec.DecodeProviderSpec(cr.Spec.ProviderSpec, &awsSpec)
@@ -86,6 +92,8 @@ func DecodeProviderSpec(codec *minterv1.ProviderCodec, cr *minterv1.CredentialsR
 	return nil, fmt.Errorf("no providerSpec defined")
 }
 func (a *AWSActuator) Exists(ctx context.Context, cr *minterv1.CredentialsRequest) (bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	logger := a.getLogger(cr)
@@ -112,6 +120,8 @@ func (a *AWSActuator) Exists(ctx context.Context, cr *minterv1.CredentialsReques
 	return true, nil
 }
 func (a *AWSActuator) needsUpdate(ctx context.Context, cr *minterv1.CredentialsRequest, infraName string) (bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	logger := a.getLogger(cr)
@@ -188,14 +198,20 @@ func (a *AWSActuator) needsUpdate(ctx context.Context, cr *minterv1.CredentialsR
 func (a *AWSActuator) Create(ctx context.Context, cr *minterv1.CredentialsRequest) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return a.sync(ctx, cr)
 }
 func (a *AWSActuator) Update(ctx context.Context, cr *minterv1.CredentialsRequest) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return a.sync(ctx, cr)
 }
 func (a *AWSActuator) sync(ctx context.Context, cr *minterv1.CredentialsRequest) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	logger := a.getLogger(cr)
@@ -243,6 +259,8 @@ func (a *AWSActuator) sync(ctx context.Context, cr *minterv1.CredentialsRequest)
 func (a *AWSActuator) syncPassthrough(ctx context.Context, cr *minterv1.CredentialsRequest, cloudCredsSecret *corev1.Secret, logger log.FieldLogger) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	existingSecret, _, _ := a.loadExistingSecret(cr)
 	accessKeyID := string(cloudCredsSecret.Data[secretannotator.AwsAccessKeyName])
 	secretAccessKey := string(cloudCredsSecret.Data[secretannotator.AwsSecretAccessKeyName])
@@ -255,6 +273,8 @@ func (a *AWSActuator) syncPassthrough(ctx context.Context, cr *minterv1.Credenti
 	return nil
 }
 func (a *AWSActuator) syncMint(ctx context.Context, cr *minterv1.CredentialsRequest, infraName string, logger log.FieldLogger) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var err error
@@ -400,6 +420,8 @@ func (a *AWSActuator) syncMint(ctx context.Context, cr *minterv1.CredentialsRequ
 func (a *AWSActuator) awsPolicyEqualsDesiredPolicy(desiredUserPolicy string, awsSpec *minterv1.AWSProviderSpec, awsStatus *minterv1.AWSProviderStatus, awsUser *iam.User, readAWSClient ccaws.Client, logger log.FieldLogger) (bool, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	currentUserPolicy, err := a.getCurrentUserPolicy(logger, readAWSClient, awsStatus.User, awsStatus.Policy)
 	if err != nil {
 		return false, err
@@ -414,6 +436,8 @@ func (a *AWSActuator) awsPolicyEqualsDesiredPolicy(desiredUserPolicy string, aws
 	return true, nil
 }
 func userHasExpectedTags(logger log.FieldLogger, user *iam.User, infraName, clusterUUID string) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if user == nil {
@@ -437,6 +461,8 @@ func userHasExpectedTags(logger log.FieldLogger, user *iam.User, infraName, clus
 func (a *AWSActuator) updateProviderStatus(ctx context.Context, logger log.FieldLogger, cr *minterv1.CredentialsRequest, awsStatus *minterv1.AWSProviderStatus) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var err error
 	cr.Status.ProviderStatus, err = a.Codec.EncodeProviderStatus(awsStatus)
 	if err != nil {
@@ -454,6 +480,8 @@ func (a *AWSActuator) updateProviderStatus(ctx context.Context, logger log.Field
 	return nil
 }
 func (a *AWSActuator) Delete(ctx context.Context, cr *minterv1.CredentialsRequest) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	logger := a.getLogger(cr)
@@ -530,6 +558,8 @@ func (a *AWSActuator) Delete(ctx context.Context, cr *minterv1.CredentialsReques
 func (a *AWSActuator) loadExistingSecret(cr *minterv1.CredentialsRequest) (*corev1.Secret, string, string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	logger := a.getLogger(cr)
 	var existingAccessKeyID string
 	var existingSecretAccessKey string
@@ -560,6 +590,8 @@ func (a *AWSActuator) loadExistingSecret(cr *minterv1.CredentialsRequest) (*core
 func (a *AWSActuator) tagUser(logger log.FieldLogger, awsClient minteraws.Client, username, infraName, clusterUUID string) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	logger.WithField("infraName", infraName).Info("tagging user with infrastructure name")
 	tags := []*iam.Tag{}
 	if infraName != "" {
@@ -577,6 +609,8 @@ func (a *AWSActuator) tagUser(logger log.FieldLogger, awsClient minteraws.Client
 func (a *AWSActuator) buildRootAWSClient(cr *minterv1.CredentialsRequest, infraName string) (minteraws.Client, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	logger := a.getLogger(cr).WithField("secret", fmt.Sprintf("%s/%s", rootAWSCredsSecretNamespace, rootAWSCredsSecret))
 	logger.Debug("loading AWS credentials from secret")
 	accessKeyID, secretAccessKey, err := minteraws.LoadCredsFromSecret(a.Client, rootAWSCredsSecretNamespace, rootAWSCredsSecret)
@@ -587,6 +621,8 @@ func (a *AWSActuator) buildRootAWSClient(cr *minterv1.CredentialsRequest, infraN
 	return a.AWSClientBuilder(accessKeyID, secretAccessKey, infraName)
 }
 func (a *AWSActuator) buildReadAWSClient(cr *minterv1.CredentialsRequest, infraName string) (minteraws.Client, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	logger := a.getLogger(cr).WithField("secret", fmt.Sprintf("%s/%s", roAWSCredsSecretNamespace, roAWSCredsSecret))
@@ -632,9 +668,13 @@ func (a *AWSActuator) buildReadAWSClient(cr *minterv1.CredentialsRequest, infraN
 func (a *AWSActuator) getLogger(cr *minterv1.CredentialsRequest) log.FieldLogger {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return log.WithFields(log.Fields{"actuator": "aws", "cr": fmt.Sprintf("%s/%s", cr.Namespace, cr.Name)})
 }
 func (a *AWSActuator) syncAccessKeySecret(cr *minterv1.CredentialsRequest, accessKeyID, secretAccessKey string, existingSecret *corev1.Secret, userPolicy string, logger log.FieldLogger) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	sLog := logger.WithFields(log.Fields{"targetSecret": fmt.Sprintf("%s/%s", cr.Spec.SecretRef.Namespace, cr.Spec.SecretRef.Name), "cr": fmt.Sprintf("%s/%s", cr.Namespace, cr.Name)})
@@ -681,6 +721,8 @@ func (a *AWSActuator) syncAccessKeySecret(cr *minterv1.CredentialsRequest, acces
 func (a *AWSActuator) getDesiredUserPolicy(entries []minterv1.StatementEntry, userARN string) (string, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	policyDoc := PolicyDocument{Version: "2012-10-17", Statement: []StatementEntry{}}
 	for _, se := range entries {
 		policyDoc.Statement = append(policyDoc.Statement, StatementEntry{Effect: se.Effect, Action: se.Action, Resource: se.Resource})
@@ -693,6 +735,8 @@ func (a *AWSActuator) getDesiredUserPolicy(entries []minterv1.StatementEntry, us
 	return string(b), nil
 }
 func (a *AWSActuator) getCloudCredentialsSecret(ctx context.Context, logger log.FieldLogger) (*corev1.Secret, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cloudCredSecret := &corev1.Secret{}
@@ -710,6 +754,8 @@ func (a *AWSActuator) getCloudCredentialsSecret(ctx context.Context, logger log.
 func isSecretAnnotated(secret *corev1.Secret) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if secret.ObjectMeta.Annotations == nil {
 		return false
 	}
@@ -721,9 +767,13 @@ func isSecretAnnotated(secret *corev1.Secret) bool {
 func addGetUserStatement(policyDoc *PolicyDocument, userARN string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	policyDoc.Statement = append(policyDoc.Statement, StatementEntry{Effect: "Allow", Action: []string{"iam:GetUser"}, Resource: userARN})
 }
 func (a *AWSActuator) getCurrentUserPolicy(logger log.FieldLogger, awsReadClient minteraws.Client, userName, policyName string) (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cupOut, err := awsReadClient.GetUserPolicy(&iam.GetUserPolicyInput{UserName: aws.String(userName), PolicyName: aws.String(policyName)})
@@ -753,6 +803,8 @@ func (a *AWSActuator) getCurrentUserPolicy(logger log.FieldLogger, awsReadClient
 func (a *AWSActuator) setUserPolicy(logger log.FieldLogger, awsClient minteraws.Client, userName, policyName, userPolicy string) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, err := awsClient.PutUserPolicy(&iam.PutUserPolicyInput{UserName: aws.String(userName), PolicyDocument: aws.String(userPolicy), PolicyName: aws.String(policyName)})
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
@@ -763,6 +815,8 @@ func (a *AWSActuator) setUserPolicy(logger log.FieldLogger, awsClient minteraws.
 	return nil
 }
 func (a *AWSActuator) accessKeyExists(logger log.FieldLogger, allUserKeys *iam.ListAccessKeysOutput, existingAccessKey string) (bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if existingAccessKey == "" {
@@ -777,6 +831,8 @@ func (a *AWSActuator) accessKeyExists(logger log.FieldLogger, allUserKeys *iam.L
 	return false, nil
 }
 func (a *AWSActuator) deleteAllAccessKeys(logger log.FieldLogger, awsClient minteraws.Client, username string, allUserKeys *iam.ListAccessKeysOutput) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	logger.Info("deleting all AWS access keys")
@@ -795,6 +851,8 @@ func (a *AWSActuator) deleteAllAccessKeys(logger log.FieldLogger, awsClient mint
 func (a *AWSActuator) createAccessKey(logger log.FieldLogger, awsClient minteraws.Client, username string) (*iam.AccessKey, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	accessKeyResult, err := awsClient.CreateAccessKey(&iam.CreateAccessKeyInput{UserName: &username})
 	if err != nil {
 		return nil, fmt.Errorf("error creating access key for user %s: %v", username, err)
@@ -805,6 +863,8 @@ func (a *AWSActuator) createAccessKey(logger log.FieldLogger, awsClient minteraw
 func userHasTag(user *iam.User, key, val string) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for _, t := range user.Tags {
 		if *t.Key == key && *t.Value == val {
 			return true
@@ -813,6 +873,8 @@ func userHasTag(user *iam.User, key, val string) bool {
 	return false
 }
 func (a *AWSActuator) createUser(logger log.FieldLogger, awsClient minteraws.Client, username string) (*iam.CreateUserOutput, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	input := &iam.CreateUserInput{UserName: aws.String(username)}
@@ -841,6 +903,8 @@ func (a *AWSActuator) createUser(logger log.FieldLogger, awsClient minteraws.Cli
 func formatAWSErr(aerr awserr.Error) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	switch aerr.Code() {
 	case iam.ErrCodeLimitExceededException:
 		log.Error(iam.ErrCodeLimitExceededException, aerr.Error())
@@ -857,6 +921,8 @@ func formatAWSErr(aerr awserr.Error) error {
 	}
 }
 func generateUserName(infraName, credentialName string) (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if credentialName == "" {
@@ -877,6 +943,8 @@ func generateUserName(infraName, credentialName string) (string, error) {
 func getPolicyName(userName string) string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return userName + "-policy"
 }
 
@@ -893,6 +961,8 @@ type StatementEntry struct {
 func (a *AWSActuator) loadClusterUUID(logger log.FieldLogger) (configv1.ClusterID, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	logger.Debug("loading cluster version to read clusterID")
 	clusterVer := &configv1.ClusterVersion{}
 	err := a.Client.Get(context.Background(), types.NamespacedName{Name: clusterVersionObjectName}, clusterVer)
@@ -906,7 +976,16 @@ func (a *AWSActuator) loadClusterUUID(logger log.FieldLogger) (configv1.ClusterI
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

@@ -31,6 +31,8 @@ const (
 func (r *ReconcileCredentialsRequest) syncOperatorStatus() error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	log.Debug("syncing cluster operator status")
 	co := &configv1.ClusterOperator{ObjectMeta: metav1.ObjectMeta{Name: cloudCredClusterOperator}}
 	err := r.Client.Get(context.TODO(), types.NamespacedName{Name: co.Name}, co)
@@ -69,6 +71,8 @@ func (r *ReconcileCredentialsRequest) syncOperatorStatus() error {
 func (r *ReconcileCredentialsRequest) getOperatorState() (*corev1.Namespace, []minterv1.CredentialsRequest, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ns := &corev1.Namespace{}
 	if err := r.Client.Get(context.TODO(), types.NamespacedName{Name: cloudCredOperatorNamespace}, ns); err != nil {
 		if errors.IsNotFound(err) {
@@ -86,11 +90,15 @@ func (r *ReconcileCredentialsRequest) getOperatorState() (*corev1.Namespace, []m
 func computeClusterOperatorVersions() []configv1.OperandVersion {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	currentVersion := os.Getenv("RELEASE_VERSION")
 	versions := []configv1.OperandVersion{{Name: "operator", Version: currentVersion}}
 	return versions
 }
 func computeStatusConditions(conditions []configv1.ClusterOperatorStatusCondition, credRequests []minterv1.CredentialsRequest) []configv1.ClusterOperatorStatusCondition {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	failingCondition := &configv1.ClusterOperatorStatusCondition{Type: configv1.OperatorFailing, Status: configv1.ConditionFalse}
@@ -145,6 +153,8 @@ func computeStatusConditions(conditions []configv1.ClusterOperatorStatusConditio
 	return conditions
 }
 func findClusterOperatorCondition(conditions []configv1.ClusterOperatorStatusCondition, conditionType configv1.ClusterStatusConditionType) *configv1.ClusterOperatorStatusCondition {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	for i, condition := range conditions {

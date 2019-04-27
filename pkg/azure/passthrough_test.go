@@ -47,6 +47,8 @@ type testInput struct {
 func TestPassthroughExists(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var tests = []struct {
 		name	string
 		in	*testInput
@@ -67,6 +69,8 @@ func TestPassthroughExists(t *testing.T) {
 	}
 }
 func TestPassthroughCreate(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var tests = []struct {
@@ -95,6 +99,8 @@ func TestPassthroughCreate(t *testing.T) {
 func TestPassthroughUpdate(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var tests = []struct {
 		name	string
 		in	*testInput
@@ -119,6 +125,8 @@ func TestPassthroughUpdate(t *testing.T) {
 	}
 }
 func TestPassthroughDelete(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var tests = []struct {
@@ -148,6 +156,8 @@ func TestPassthroughDelete(t *testing.T) {
 	}
 }
 func newCredentialsRequest(in *testInput) (*minterv1.CredentialsRequest, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	codec, err := minterv1.NewCodec()

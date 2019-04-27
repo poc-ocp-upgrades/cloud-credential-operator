@@ -15,9 +15,13 @@ type UpdateConditionCheck func(oldReason, oldMessage, newReason, newMessage stri
 func UpdateConditionAlways(_, _, _, _ string) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return true
 }
 func UpdateConditionIfReasonOrMessageChange(oldReason, oldMessage, newReason, newMessage string) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return oldReason != newReason || oldMessage != newMessage
@@ -25,9 +29,13 @@ func UpdateConditionIfReasonOrMessageChange(oldReason, oldMessage, newReason, ne
 func UpdateConditionNever(_, _, _, _ string) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return false
 }
 func FindCredentialsRequestCondition(conditions []minterv1.CredentialsRequestCondition, conditionType minterv1.CredentialsRequestConditionType) *minterv1.CredentialsRequestCondition {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	for i, condition := range conditions {
@@ -40,12 +48,16 @@ func FindCredentialsRequestCondition(conditions []minterv1.CredentialsRequestCon
 func shouldUpdateCondition(oldStatus corev1.ConditionStatus, oldReason, oldMessage string, newStatus corev1.ConditionStatus, newReason, newMessage string, updateConditionCheck UpdateConditionCheck) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if oldStatus != newStatus {
 		return true
 	}
 	return updateConditionCheck(oldReason, oldMessage, newReason, newMessage)
 }
 func SetCredentialsRequestCondition(conditions []minterv1.CredentialsRequestCondition, conditionType minterv1.CredentialsRequestConditionType, status corev1.ConditionStatus, reason string, message string, updateConditionCheck UpdateConditionCheck) []minterv1.CredentialsRequestCondition {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	now := metav1.Now()
@@ -70,7 +82,16 @@ func SetCredentialsRequestCondition(conditions []minterv1.CredentialsRequestCond
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

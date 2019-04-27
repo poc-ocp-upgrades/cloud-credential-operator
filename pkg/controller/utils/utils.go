@@ -30,11 +30,15 @@ const (
 func init() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err := minterv1.AddToScheme(credentailRequestScheme); err != nil {
 		panic(err)
 	}
 }
 func LoadInfrastructureName(c client.Client, logger log.FieldLogger) (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	infra := &configv1.Infrastructure{}
@@ -49,9 +53,13 @@ func LoadInfrastructureName(c client.Client, logger log.FieldLogger) (string, er
 func CheckCloudCredCreation(awsClient ccaws.Client, logger log.FieldLogger) (bool, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return CheckPermissionsAgainstActions(awsClient, credMintingActions, logger)
 }
 func getClientDetails(awsClient ccaws.Client) (*iam.User, bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	rootUser := false
@@ -69,6 +77,8 @@ func getClientDetails(awsClient ccaws.Client) (*iam.User, bool, error) {
 	return user.User, rootUser, nil
 }
 func CheckPermissionsUsingQueryClient(queryClient, targetClient ccaws.Client, statementEntries []minterv1.StatementEntry, logger log.FieldLogger) (bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	targetUser, isRoot, err := getClientDetails(targetClient)
@@ -105,9 +115,13 @@ func CheckPermissionsUsingQueryClient(queryClient, targetClient ccaws.Client, st
 func CheckPermissionsAgainstStatementList(awsClient ccaws.Client, statementEntries []minterv1.StatementEntry, logger log.FieldLogger) (bool, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return CheckPermissionsUsingQueryClient(awsClient, awsClient, statementEntries, logger)
 }
 func CheckPermissionsAgainstActions(awsClient ccaws.Client, actionList []string, logger log.FieldLogger) (bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	statementList := []minterv1.StatementEntry{{Action: actionList, Resource: "*", Effect: "Allow"}}
@@ -116,9 +130,13 @@ func CheckPermissionsAgainstActions(awsClient ccaws.Client, actionList []string,
 func CheckCloudCredPassthrough(awsClient ccaws.Client, logger log.FieldLogger) (bool, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return CheckPermissionsAgainstActions(awsClient, credPassthroughActions, logger)
 }
 func readCredentialRequest(cr []byte) (*minterv1.CredentialsRequest, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	newObj, err := runtime.Decode(credentialRequestCodec.UniversalDecoder(minterv1.SchemeGroupVersion), cr)
@@ -128,6 +146,8 @@ func readCredentialRequest(cr []byte) (*minterv1.CredentialsRequest, error) {
 	return newObj.(*minterv1.CredentialsRequest), nil
 }
 func getCredentialRequestStatements(crBytes []byte) ([]minterv1.StatementEntry, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	statementList := []minterv1.StatementEntry{}

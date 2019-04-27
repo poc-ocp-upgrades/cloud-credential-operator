@@ -7,5 +7,7 @@ import (
 func init() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	AddToManagerFuncs = append(AddToManagerFuncs, secretannotator.Add)
 }

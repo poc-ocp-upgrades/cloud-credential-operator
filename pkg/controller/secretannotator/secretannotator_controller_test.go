@@ -35,9 +35,13 @@ const (
 func init() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	log.SetLevel(log.DebugLevel)
 }
 func TestSecretAnnotatorReconcile(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	apis.AddToScheme(scheme.Scheme)
@@ -99,10 +103,14 @@ func TestSecretAnnotatorReconcile(t *testing.T) {
 func testSecret() *corev1.Secret {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	s := &corev1.Secret{ObjectMeta: metav1.ObjectMeta{Name: testSecretName, Namespace: testNamespace}, Data: map[string][]byte{AwsAccessKeyName: []byte(testAWSAccessKeyID), AwsSecretAccessKeyName: []byte(testAWSSecretAccessKey)}}
 	return s
 }
 func mockGetRootUser(mockAWSClient *mockaws.MockClient) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	rootAcctNum := "123456789012"
@@ -111,9 +119,13 @@ func mockGetRootUser(mockAWSClient *mockaws.MockClient) {
 func mockGetUser(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().GetUser(nil).Return(&iam.GetUserOutput{User: &iam.User{UserName: aws.String(testAWSUser), Arn: aws.String(testAWSUserARN), UserId: aws.String(testAWSAccessKeyID)}}, nil)
 }
 func mockSimulatePrincipalPolicyCredMinterSuccess(mockAWSClient *mockaws.MockClient) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().SimulatePrincipalPolicy(gomock.Any()).Return(&iam.SimulatePolicyResponse{EvaluationResults: []*iam.EvaluationResult{{EvalDecision: aws.String("allowed")}}}, nil)
@@ -121,9 +133,13 @@ func mockSimulatePrincipalPolicyCredMinterSuccess(mockAWSClient *mockaws.MockCli
 func mockSimulatePrincipalPolicyCredMinterFail(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().SimulatePrincipalPolicy(gomock.Any()).Return(&iam.SimulatePolicyResponse{EvaluationResults: []*iam.EvaluationResult{{EvalDecision: aws.String("notallowed"), EvalActionName: aws.String("SomeAWSAction")}}}, nil)
 }
 func mockSimulatePrincipalPolicyCredPassthroughSuccess(mockAWSClient *mockaws.MockClient) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().SimulatePrincipalPolicy(gomock.Any()).Return(&iam.SimulatePolicyResponse{EvaluationResults: []*iam.EvaluationResult{{EvalDecision: aws.String("allowed")}}}, nil)
@@ -131,9 +147,13 @@ func mockSimulatePrincipalPolicyCredPassthroughSuccess(mockAWSClient *mockaws.Mo
 func mockSimulatePrincipalPolicyCredPassthroughFail(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().SimulatePrincipalPolicy(gomock.Any()).Return(&iam.SimulatePolicyResponse{EvaluationResults: []*iam.EvaluationResult{{EvalDecision: aws.String("notallowed"), EvalActionName: aws.String("SomeAWSAction")}}}, nil)
 }
 func validateSecretAnnotation(c client.Client, t *testing.T, value string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	secret := getCredSecret(c)
@@ -146,6 +166,8 @@ func validateSecretAnnotation(c client.Client, t *testing.T, value string) {
 	assert.Exactly(t, value, secret.ObjectMeta.Annotations[AnnotationKey])
 }
 func getCredSecret(c client.Client) *corev1.Secret {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	secret := &corev1.Secret{}

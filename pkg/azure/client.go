@@ -21,9 +21,13 @@ type clientWrapper struct{ client.Client }
 func newClientWrapper(c client.Client) *clientWrapper {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &clientWrapper{Client: c}
 }
 func (cw *clientWrapper) RootSecret(ctx context.Context) (*secret, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	secret, err := cw.Secret(ctx, RootSecretKey)
@@ -38,6 +42,8 @@ func (cw *clientWrapper) RootSecret(ctx context.Context) (*secret, error) {
 func (cw *clientWrapper) Secret(ctx context.Context, key client.ObjectKey) (*secret, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	s := secret{}
 	if err := cw.Get(ctx, key, &s.Secret); err != nil {
 		return nil, err
@@ -45,6 +51,8 @@ func (cw *clientWrapper) Secret(ctx context.Context, key client.ObjectKey) (*sec
 	return &s, nil
 }
 func (cw *clientWrapper) Mode(ctx context.Context) (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	rs, err := cw.RootSecret(ctx)

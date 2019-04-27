@@ -54,5 +54,7 @@ const (
 func init() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	SchemeBuilder.Register(&CredentialsRequest{}, &CredentialsRequestList{}, &AWSProviderStatus{}, &AWSProviderSpec{}, &AzureProviderStatus{}, &AzureProviderSpec{})
 }

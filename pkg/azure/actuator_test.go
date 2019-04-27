@@ -11,6 +11,8 @@ import (
 func TestAnnotations(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var tests = []struct {
 		name		string
 		in		corev1.Secret

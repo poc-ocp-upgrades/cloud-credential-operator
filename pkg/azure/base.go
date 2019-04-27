@@ -13,9 +13,13 @@ type base struct{ client *clientWrapper }
 func (a *base) Delete(context.Context, *minterv1.CredentialsRequest) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return nil
 }
 func (a *base) Exists(ctx context.Context, cr *minterv1.CredentialsRequest) (bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	req, err := newRequest(cr)

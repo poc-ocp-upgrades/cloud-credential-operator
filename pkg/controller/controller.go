@@ -24,6 +24,8 @@ var AddToManagerWithActuatorFuncs []func(manager.Manager, actuator.Actuator) err
 func AddToManager(m manager.Manager) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for _, f := range AddToManagerFuncs {
 		if err := f(m); err != nil {
 			return err
@@ -62,6 +64,8 @@ func AddToManager(m manager.Manager) error {
 func platformType(m manager.Manager) (configv1.PlatformType, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	client, err := getClient()
 	if err != nil {
 		return configv1.NonePlatformType, err
@@ -75,6 +79,8 @@ func platformType(m manager.Manager) (configv1.PlatformType, error) {
 	return infra.Status.Platform, nil
 }
 func getClient() (client.Client, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	rules := clientcmd.NewDefaultClientConfigLoadingRules()

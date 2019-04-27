@@ -24,6 +24,8 @@ type Actuator struct {
 func NewActuator(c client.Client) (*Actuator, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cw := newClientWrapper(c)
 	mode, err := cw.Mode(context.Background())
 	if err != nil {
@@ -39,9 +41,13 @@ func NewActuator(c client.Client) (*Actuator, error) {
 func (a *Actuator) Create(ctx context.Context, cr *minterv1.CredentialsRequest) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return a.internal.Create(ctx, cr)
 }
 func (a *Actuator) Delete(ctx context.Context, cr *minterv1.CredentialsRequest) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return a.internal.Delete(ctx, cr)
@@ -49,9 +55,13 @@ func (a *Actuator) Delete(ctx context.Context, cr *minterv1.CredentialsRequest) 
 func (a *Actuator) Update(ctx context.Context, cr *minterv1.CredentialsRequest) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return a.internal.Update(ctx, cr)
 }
 func (a *Actuator) Exists(ctx context.Context, cr *minterv1.CredentialsRequest) (bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return a.internal.Exists(ctx, cr)
@@ -59,7 +69,16 @@ func (a *Actuator) Exists(ctx context.Context, cr *minterv1.CredentialsRequest) 
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

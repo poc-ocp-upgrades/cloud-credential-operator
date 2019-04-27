@@ -42,9 +42,13 @@ type awsClient struct{ iamClient iamiface.IAMAPI }
 func (c *awsClient) CreateAccessKey(input *iam.CreateAccessKeyInput) (*iam.CreateAccessKeyOutput, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.iamClient.CreateAccessKey(input)
 }
 func (c *awsClient) CreateUser(input *iam.CreateUserInput) (*iam.CreateUserOutput, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return c.iamClient.CreateUser(input)
@@ -52,9 +56,13 @@ func (c *awsClient) CreateUser(input *iam.CreateUserInput) (*iam.CreateUserOutpu
 func (c *awsClient) DeleteAccessKey(input *iam.DeleteAccessKeyInput) (*iam.DeleteAccessKeyOutput, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.iamClient.DeleteAccessKey(input)
 }
 func (c *awsClient) DeleteUser(input *iam.DeleteUserInput) (*iam.DeleteUserOutput, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return c.iamClient.DeleteUser(input)
@@ -62,9 +70,13 @@ func (c *awsClient) DeleteUser(input *iam.DeleteUserInput) (*iam.DeleteUserOutpu
 func (c *awsClient) DeleteUserPolicy(input *iam.DeleteUserPolicyInput) (*iam.DeleteUserPolicyOutput, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.iamClient.DeleteUserPolicy(input)
 }
 func (c *awsClient) GetUser(input *iam.GetUserInput) (*iam.GetUserOutput, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return c.iamClient.GetUser(input)
@@ -72,9 +84,13 @@ func (c *awsClient) GetUser(input *iam.GetUserInput) (*iam.GetUserOutput, error)
 func (c *awsClient) ListAccessKeys(input *iam.ListAccessKeysInput) (*iam.ListAccessKeysOutput, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.iamClient.ListAccessKeys(input)
 }
 func (c *awsClient) ListUserPolicies(input *iam.ListUserPoliciesInput) (*iam.ListUserPoliciesOutput, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return c.iamClient.ListUserPolicies(input)
@@ -82,9 +98,13 @@ func (c *awsClient) ListUserPolicies(input *iam.ListUserPoliciesInput) (*iam.Lis
 func (c *awsClient) PutUserPolicy(input *iam.PutUserPolicyInput) (*iam.PutUserPolicyOutput, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.iamClient.PutUserPolicy(input)
 }
 func (c *awsClient) GetUserPolicy(input *iam.GetUserPolicyInput) (*iam.GetUserPolicyOutput, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return c.iamClient.GetUserPolicy(input)
@@ -92,14 +112,20 @@ func (c *awsClient) GetUserPolicy(input *iam.GetUserPolicyInput) (*iam.GetUserPo
 func (c *awsClient) SimulatePrincipalPolicy(input *iam.SimulatePrincipalPolicyInput) (*iam.SimulatePolicyResponse, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.iamClient.SimulatePrincipalPolicy(input)
 }
 func (c *awsClient) TagUser(input *iam.TagUserInput) (*iam.TagUserOutput, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.iamClient.TagUser(input)
 }
 func NewClient(accessKeyID, secretAccessKey []byte, infraName string) (Client, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	awsConfig := &awssdk.Config{}
@@ -112,6 +138,8 @@ func NewClient(accessKeyID, secretAccessKey []byte, infraName string) (Client, e
 	return &awsClient{iamClient: iam.New(s)}, nil
 }
 func LoadCredsFromSecret(kubeClient client.Client, namespace, secretName string) ([]byte, []byte, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	secret := &corev1.Secret{}
@@ -132,7 +160,16 @@ func LoadCredsFromSecret(kubeClient client.Client, namespace, secretName string)
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

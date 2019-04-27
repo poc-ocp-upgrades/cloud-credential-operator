@@ -39,6 +39,8 @@ const (
 func init() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	log.SetLevel(log.DebugLevel)
 }
 
@@ -54,6 +56,8 @@ type ExpectedCOCondition struct {
 }
 
 func TestCredentialsRequestReconcile(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	apis.AddToScheme(scheme.Scheme)
@@ -444,12 +448,16 @@ var (
 func testPassthroughCredentialsRequestWithDeletionTimestamp(t *testing.T) *minterv1.CredentialsRequest {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cr := testPassthroughCredentialsRequest(t)
 	now := metav1.Now()
 	cr.DeletionTimestamp = &now
 	return cr
 }
 func testCredentialsRequestWithRecentLastSync(t *testing.T) *minterv1.CredentialsRequest {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cr := testCredentialsRequest(t)
@@ -460,6 +468,8 @@ func testCredentialsRequestWithRecentLastSync(t *testing.T) *minterv1.Credential
 func testCredentialsRequestWithDeletionTimestamp(t *testing.T) *minterv1.CredentialsRequest {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cr := testCredentialsRequest(t)
 	now := metav1.Now()
 	cr.DeletionTimestamp = &now
@@ -467,6 +477,8 @@ func testCredentialsRequestWithDeletionTimestamp(t *testing.T) *minterv1.Credent
 	return cr
 }
 func testPassthroughCredentialsRequest(t *testing.T) *minterv1.CredentialsRequest {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	codec, err := minterv1.NewCodec()
@@ -484,6 +496,8 @@ func testPassthroughCredentialsRequest(t *testing.T) *minterv1.CredentialsReques
 	return &minterv1.CredentialsRequest{ObjectMeta: metav1.ObjectMeta{Name: testCRName, Namespace: testNamespace, Finalizers: []string{minterv1.FinalizerDeprovision}, UID: types.UID("1234"), Annotations: map[string]string{}, Generation: testCRGeneration}, Spec: minterv1.CredentialsRequestSpec{SecretRef: corev1.ObjectReference{Name: testSecretName, Namespace: testSecretNamespace}, ProviderSpec: awsProvSpec}}
 }
 func testCredentialsRequest(t *testing.T) *minterv1.CredentialsRequest {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cr := testPassthroughCredentialsRequest(t)
@@ -505,9 +519,13 @@ func testCredentialsRequest(t *testing.T) *minterv1.CredentialsRequest {
 func createTestNamespace(namespace string) *corev1.Namespace {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &corev1.Namespace{ObjectMeta: metav1.ObjectMeta{Name: namespace}}
 }
 func testInsufficientAWSCredsSecret(namespace, name, accessKeyID, secretAccessKey string) *corev1.Secret {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	s := testAWSCredsSecret(namespace, name, accessKeyID, secretAccessKey)
@@ -517,11 +535,15 @@ func testInsufficientAWSCredsSecret(namespace, name, accessKeyID, secretAccessKe
 func testPassthroughAWSCredsSecret(namespace, name, accessKeyID, secretAccessKey string) *corev1.Secret {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	s := testAWSCredsSecret(namespace, name, accessKeyID, secretAccessKey)
 	s.Annotations[secretannotator.AnnotationKey] = secretannotator.PassthroughAnnotation
 	return s
 }
 func testAWSCredsSecret(namespace, name, accessKeyID, secretAccessKey string) *corev1.Secret {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	s := &corev1.Secret{ObjectMeta: metav1.ObjectMeta{Name: name, Namespace: namespace, Annotations: map[string]string{secretannotator.AnnotationKey: secretannotator.MintAnnotation}}, Data: map[string][]byte{"aws_access_key_id": []byte(accessKeyID), "aws_secret_access_key": []byte(secretAccessKey)}}
@@ -530,9 +552,13 @@ func testAWSCredsSecret(namespace, name, accessKeyID, secretAccessKey string) *c
 func genericAWSError() error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return awserr.New("GenericFailure", "An error besides NotFound", fmt.Errorf("Just a generic AWS error for test purposes"))
 }
 func mockFailedGetUser(mockAWSClient *mockaws.MockClient) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().GetUser(gomock.Any()).Return(nil, genericAWSError()).AnyTimes()
@@ -540,9 +566,13 @@ func mockFailedGetUser(mockAWSClient *mockaws.MockClient) {
 func mockGetUserNotFound(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().GetUser(gomock.Any()).Return(nil, awserr.New(iam.ErrCodeNoSuchEntityException, "no such entity", nil)).AnyTimes()
 }
 func mockGetUser(mockAWSClient *mockaws.MockClient) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().GetUser(gomock.Any()).Return(&iam.GetUserOutput{User: &iam.User{UserId: aws.String(testAWSUserID), UserName: aws.String(testAWSUser), Arn: aws.String(testAWSARN), Tags: []*iam.Tag{{Key: aws.String(fmt.Sprintf("kubernetes.io/cluster/%s", testInfraName)), Value: aws.String("owned")}}}}, nil).AnyTimes()
@@ -550,9 +580,13 @@ func mockGetUser(mockAWSClient *mockaws.MockClient) {
 func mockGetUserUntagged(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().GetUser(gomock.Any()).Return(&iam.GetUserOutput{User: &iam.User{UserId: aws.String(testAWSUserID), UserName: aws.String(testAWSUser), Arn: aws.String(testAWSARN)}}, nil).AnyTimes()
 }
 func mockDeleteUserFailure(mockAWSClient *mockaws.MockClient) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().DeleteUser(gomock.Any()).Return(nil, genericAWSError())
@@ -560,9 +594,13 @@ func mockDeleteUserFailure(mockAWSClient *mockaws.MockClient) {
 func mockDeleteUser(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().DeleteUser(gomock.Any()).Return(&iam.DeleteUserOutput{}, nil)
 }
 func mockDeleteUserPolicy(mockAWSClient *mockaws.MockClient) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().DeleteUserPolicy(gomock.Any()).Return(&iam.DeleteUserPolicyOutput{}, nil)
@@ -570,9 +608,13 @@ func mockDeleteUserPolicy(mockAWSClient *mockaws.MockClient) {
 func mockListAccessKeysEmpty(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().ListAccessKeys(&iam.ListAccessKeysInput{UserName: aws.String(testAWSUser)}).Return(&iam.ListAccessKeysOutput{AccessKeyMetadata: []*iam.AccessKeyMetadata{}}, nil)
 }
 func mockListAccessKeys(mockAWSClient *mockaws.MockClient, accessKeyID string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().ListAccessKeys(&iam.ListAccessKeysInput{UserName: aws.String(testAWSUser)}).Return(&iam.ListAccessKeysOutput{AccessKeyMetadata: []*iam.AccessKeyMetadata{{AccessKeyId: aws.String(accessKeyID)}}}, nil)
@@ -580,9 +622,13 @@ func mockListAccessKeys(mockAWSClient *mockaws.MockClient, accessKeyID string) {
 func mockCreateUser(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().CreateUser(&iam.CreateUserInput{UserName: aws.String(testAWSUser)}).Return(&iam.CreateUserOutput{User: &iam.User{UserName: aws.String(testAWSUser), UserId: aws.String(testAWSUserID), Arn: aws.String(testAWSARN)}}, nil)
 }
 func mockCreateAccessKey(mockAWSClient *mockaws.MockClient, accessKeyID, secretAccessKey string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().CreateAccessKey(&iam.CreateAccessKeyInput{UserName: aws.String(testAWSUser)}).Return(&iam.CreateAccessKeyOutput{AccessKey: &iam.AccessKey{AccessKeyId: aws.String(accessKeyID), SecretAccessKey: aws.String(secretAccessKey)}}, nil)
@@ -590,9 +636,13 @@ func mockCreateAccessKey(mockAWSClient *mockaws.MockClient, accessKeyID, secretA
 func mockTagUser(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().TagUser(&iam.TagUserInput{UserName: aws.String(testAWSUser), Tags: []*iam.Tag{{Key: aws.String(fmt.Sprintf("kubernetes.io/cluster/%s", testInfraName)), Value: aws.String("owned")}}}).Return(&iam.TagUserOutput{}, nil)
 }
 func mockTagUserLegacy(mockAWSClient *mockaws.MockClient) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().TagUser(&iam.TagUserInput{UserName: aws.String(testAWSUser), Tags: []*iam.Tag{{Key: aws.String(openshiftClusterIDKey), Value: aws.String(testClusterID)}}}).Return(&iam.TagUserOutput{}, nil)
@@ -600,14 +650,20 @@ func mockTagUserLegacy(mockAWSClient *mockaws.MockClient) {
 func mockDeleteAccessKey(mockAWSClient *mockaws.MockClient, accessKeyID string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().DeleteAccessKey(&iam.DeleteAccessKeyInput{UserName: aws.String(testAWSUser), AccessKeyId: aws.String(accessKeyID)}).Return(&iam.DeleteAccessKeyOutput{}, nil)
 }
 func mockPutUserPolicy(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().PutUserPolicy(gomock.Any()).Return(&iam.PutUserPolicyOutput{}, nil)
 }
 func mockGetUserPolicy(mockAWSClient *mockaws.MockClient, policyDoc string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	policyDoc = url.QueryEscape(policyDoc)
@@ -616,9 +672,13 @@ func mockGetUserPolicy(mockAWSClient *mockaws.MockClient, policyDoc string) {
 func mockGetUserPolicyMissing(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().GetUserPolicy(gomock.Any()).Return(nil, awserr.New(iam.ErrCodeNoSuchEntityException, "no such policy", nil))
 }
 func testClusterVersion() *configv1.ClusterVersion {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return &configv1.ClusterVersion{ObjectMeta: metav1.ObjectMeta{Name: "version"}, Spec: configv1.ClusterVersionSpec{ClusterID: testClusterID}}
@@ -626,9 +686,13 @@ func testClusterVersion() *configv1.ClusterVersion {
 func mockSimulatePrincipalPolicySuccess(mockAWSClient *mockaws.MockClient) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mockAWSClient.EXPECT().SimulatePrincipalPolicy(gomock.Any()).Return(&iam.SimulatePolicyResponse{EvaluationResults: []*iam.EvaluationResult{{EvalDecision: aws.String("allowed")}}}, nil)
 }
 func testInfrastructure(infraName string) *configv1.Infrastructure {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return &configv1.Infrastructure{ObjectMeta: metav1.ObjectMeta{Name: "cluster"}, Status: configv1.InfrastructureStatus{Platform: configv1.AWSPlatformType, InfrastructureName: infraName}}

