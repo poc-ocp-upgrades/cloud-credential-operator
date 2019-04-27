@@ -1,19 +1,3 @@
-/*
-Copyright 2018 The OpenShift Authors.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 package actuator
 
 import (
@@ -23,45 +7,15 @@ import (
 )
 
 func TestGenerateUserName(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tests := []struct {
-		name           string
-		clusterName    string
-		credentialName string
-		expectedPrefix string // last part is random
-		expectedError  bool
-	}{
-		{
-			name:           "max size no truncating required",
-			clusterName:    "20charclustername111",                  // max 20 chars
-			credentialName: "openshift-cluster-ingress111111111111", // max 37 chars
-			expectedPrefix: "20charclustername111-openshift-cluster-ingress111111111111-",
-		},
-		{
-			name:           "credential name truncated to 37 chars",
-			clusterName:    "shortcluster",
-			credentialName: "openshift-cluster-ingress111111111111333333333333333", // over 37 chars
-			expectedPrefix: "shortcluster-openshift-cluster-ingress111111111111-",
-		},
-		{
-			name:           "cluster name truncated to 20 chars",
-			clusterName:    "longclustername1111137492374923874928347928374", // over 20 chars
-			credentialName: "openshift-cluster-ingress",
-			expectedPrefix: "longclustername11111-openshift-cluster-ingress-",
-		},
-		{
-			name:           "empty credential name",
-			clusterName:    "shortcluster",
-			credentialName: "",
-			expectedError:  true,
-		},
-		{
-			name:           "empty infra name",
-			clusterName:    "",
-			credentialName: "something",
-			expectedPrefix: "something-",
-		},
-	}
-
+		name		string
+		clusterName	string
+		credentialName	string
+		expectedPrefix	string
+		expectedError	bool
+	}{{name: "max size no truncating required", clusterName: "20charclustername111", credentialName: "openshift-cluster-ingress111111111111", expectedPrefix: "20charclustername111-openshift-cluster-ingress111111111111-"}, {name: "credential name truncated to 37 chars", clusterName: "shortcluster", credentialName: "openshift-cluster-ingress111111111111333333333333333", expectedPrefix: "shortcluster-openshift-cluster-ingress111111111111-"}, {name: "cluster name truncated to 20 chars", clusterName: "longclustername1111137492374923874928347928374", credentialName: "openshift-cluster-ingress", expectedPrefix: "longclustername11111-openshift-cluster-ingress-"}, {name: "empty credential name", clusterName: "shortcluster", credentialName: "", expectedError: true}, {name: "empty infra name", clusterName: "", credentialName: "something", expectedPrefix: "something-"}}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			userName, err := generateUserName(test.clusterName, test.credentialName)
